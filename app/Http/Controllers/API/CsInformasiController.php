@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Angkatan;
 use App\Faq;
 use App\Info;
+use App\Pendaftaran;
 use App\PenggunaDetail;
 use App\User;
 use Illuminate\Http\Request;
@@ -55,6 +56,28 @@ class CsInformasiController extends BaseController
             return $this->sendResponse($data, 'Berhasil menampilkan list teman angkatan');
         } catch (\Exception $e) {
             return $this->sendError($e->errorInfo[2], null, 500);
+        }
+    }
+
+    public function hariPendaftaranDibuka(Pendaftaran $pendaftaran)
+    {
+        try {
+            $data = $pendaftaran->with('angkatan')->orderBy('id', 'DESC')->first();
+            $accessDate = date('Y-m-d');
+            $accessDate = date('Y-m-d', strtotime($accessDate));
+            $dateStart = date('Y-m-d', strtotime($data->tanggal_buka));
+            $dateEnd = date('Y-m-d', strtotime($data->tanggal_tutup));
+
+            if (($accessDate >= $dateStart) && ($accessDate <= $dateEnd)) {
+                $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Sudah Di Buka!";
+                $data = ["open" => true];
+            } else {
+                $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Sudah Di Tutup!";
+                $data = ["open" => false];
+            }
+            return $this->sendResponse($data, $message);
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), null, 500);
         }
     }
 }
