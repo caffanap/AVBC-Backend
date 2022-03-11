@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 
-class RegisterController extends BaseController
+class AuthController extends BaseController
 {
     /**
      * Register api
@@ -45,7 +45,7 @@ class RegisterController extends BaseController
         }
 
         if ($request->foto) {
-            $photoPath = url('/photo')."/".Str::uuid() . '.' . $request->foto->extension();
+            $photoPath = url('/photo') . "/" . Str::uuid() . '.' . $request->foto->extension();
             $request->foto->move(public_path('photo'), $photoPath);
         } else {
             $photoPath = null;
@@ -77,7 +77,8 @@ class RegisterController extends BaseController
             $success['user']['pengguna_detail'] = $detail;
             return $this->sendResponse($success, 'User register successfully.');
         } catch (\Exception $e) {
-            return $this->sendError($e->getMessage());
+            DB::rollBack();
+            return $this->sendError($e->errorInfo[2], null, 500);
         }
     }
 

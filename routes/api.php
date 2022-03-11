@@ -13,5 +13,13 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::post('register', 'API\RegisterController@register');
-Route::post('login', 'API\RegisterController@login');
+Route::post('register', 'API\AuthController@register');
+Route::post('login', 'API\AuthController@login');
+
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return "terproteksi";
+});
+
+Route::middleware(['auth:api'])->prefix('main')->group(function () {
+    Route::get('info', 'API\InformasiController@info');
+});
