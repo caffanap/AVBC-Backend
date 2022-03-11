@@ -12,5 +12,10 @@ class Angkatan extends Model
     {
         return $this->hasMany(PenggunaDetail::class);
     }
+
+    public function pendaftaran()
+    {
+        return $this->hasOne(Pendaftaran::class);
+    }
     //
 }

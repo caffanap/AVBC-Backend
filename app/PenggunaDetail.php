@@ -13,4 +13,9 @@ class PenggunaDetail extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function angkatan()
+    {
+        return $this->belongsTo(Angkatan::class);
+    }
+
 }

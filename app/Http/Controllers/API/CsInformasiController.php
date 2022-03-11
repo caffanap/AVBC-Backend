@@ -59,6 +59,20 @@ class CsInformasiController extends BaseController
         }
     }
 
+    public function groupWa(User $user)
+    {
+        try {
+            $authenticated_user = Auth::user();
+            $data = $user->with('pengguna_detail.angkatan.pendaftaran')->where('id', $authenticated_user->id)->first();
+            $data = [
+                'link' => $data->pengguna_detail->angkatan->pendaftaran->link_wa
+            ];
+            return $this->sendResponse($data, "Berhasil menampilkan grup WA");
+        } catch (\Exception $e) {
+            return $this->sendError($e->getMessage(), null, 500);
+        }
+    }
+
     public function hariPendaftaranDibuka(Pendaftaran $pendaftaran)
     {
         try {
@@ -73,7 +87,7 @@ class CsInformasiController extends BaseController
                 $data = ["open" => true, "judul" => $data->judul, "deskripsi" => $data->deskripsi];
             } else {
                 $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Sudah Di Tutup!";
-                $data = ["open" => false, "judul" => $data->judul, "deskripsi" => $data->deskripsi];
+                $data = ["open" => false];
             }
             return $this->sendResponse($data, $message);
         } catch (\Exception $e) {
