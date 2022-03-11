@@ -20,6 +20,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return "terproteksi";
 });
 
+Route::prefix('public')->group(function () {
+    Route::get('info', 'API\InformasiController@info');
+});
+
 Route::middleware(['auth:api'])->prefix('main')->group(function () {
     Route::get('info', 'API\InformasiController@info');
 });
