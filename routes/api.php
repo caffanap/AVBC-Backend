@@ -21,9 +21,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::prefix('public')->group(function () {
-    Route::get('info', 'API\InformasiController@info');
+    Route::get('info', 'API\CsInformasiController@info');
+    Route::get('faq', 'API\CsInformasiController@faq');
 });
 
 Route::middleware(['auth:api'])->prefix('main')->group(function () {
-    Route::get('info', 'API\InformasiController@info');
+    Route::get('info', 'API\CsInformasiController@info');
 });

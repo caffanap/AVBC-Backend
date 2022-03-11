@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Faq;
 use App\Info;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class InformasiController extends BaseController
+class CsInformasiController extends BaseController
 {
     //
     public function info(Info $info)
@@ -28,6 +29,16 @@ class InformasiController extends BaseController
             } catch (\Exception $e) {
                 return $this->sendError($e->errorInfo[2], null, 500);
             }
+        }
+    }
+
+    public function faq(Faq $faq)
+    {
+        try {
+            $data = $faq->get();
+            return $this->sendResponse($data, 'Berhasil menampilkan list faq');
+        } catch (\Exception $e) {
+            return $this->sendError($e->errorInfo[2], null, 500);
         }
     }
 }
