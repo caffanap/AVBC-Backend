@@ -23,6 +23,7 @@ class CreateInfosTable extends Migration
             $table->dateTime('jadwal')->nullable();
             $table->text('ketentuan')->nullable();
             $table->string('maps')->nullable();
+            $table->enum('type', ['info', 'kegiatan'])->default('info');
             $table->timestamps();
         });
     }

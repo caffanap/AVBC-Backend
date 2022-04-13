@@ -13,6 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::prefix('auth')->group(function () {
+    Route::post('/login', 'AuthenticationController@authenticate');
+    Route::get('/logout', 'AuthenticationController@logout');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::redirect('/', '/admin/login');
+    Route::get('/login', 'AuthenticationController@login')->name('admin/login');
+
+    Route::middleware(['auth:web'])->as('admin.')->group(function () {
+        Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
+
+        Route::resource('angkatan', AngkatanController::class);
+
+
+        Route::get('change-password', 'DashboardController@changePassword')->name('change-password');
+        Route::post('change-password', 'DashboardController@changePassword')->name('process-change-password');
+    });
 });
