@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Master Angkatan')
+@section('title', 'Daftar Anggota')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Master Angkatan</h1>
+                    <h1>Daftar Anggota</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -82,18 +82,17 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Master Angkatan</h3>
+                            <h3 class="card-title">Data Daftar Anggota</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
-                            <a href="javascript:void(0)" class="btn btn-primary" id="tombol-tambah">
-                                <i class="fa fa-plus mr-1"></i> Tambah
-                            </a>
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>No</th>
+                                        <th>NIM</th>
                                         <th>Nama</th>
+                                        <th>Angkatan</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -130,63 +129,6 @@
             });
         });
 
-        // button tambah
-        $('#tombol-tambah').click(function() {
-            $('#button-simpan').val("create-post");
-            $('#id').val('');
-            $('#form-tambah-edit').trigger("reset");
-            $('#modal-judul').html("Tambah Angkatan");
-            $('#tambah-edit-modal').modal('show');
-        })
-
-        $('#tambah-edit-modal').on('shown.bs.modal', function() {
-            $("#nama").focus();
-        })
-
-        // form tambah
-        if ($("#form-tambah-edit").length > 0) {
-            $("#form-tambah-edit").validate({
-                submitHandler: function(form) {
-                    var actionType = $('#tombol-simpan').val();
-                    $('#tombol-simpan').html('Sending..');
-                    $.ajax({
-                        data: $('#form-tambah-edit').serialize(),
-                        url: "{{ route('admin.angkatan.store') }}",
-                        type: "POST",
-                        dataType: 'json',
-                        success: function(data) {
-                            $('#form-tambah-edit').trigger("reset");
-                            $('#tambah-edit-modal').modal('hide');
-                            $('#tombol-simpan').html('Simpan');
-                            var oTable = $('#example1').dataTable();
-                            oTable.fnDraw(false);
-                            iziToast.success({
-                                title: 'Data Berhasil Disimpan',
-                                position: 'bottomRight'
-                            });
-                        },
-                        error: function(data) {
-                            console.log('Error:', data);
-                            $('#tombol-simpan').html('Simpan');
-                        }
-                    });
-                }
-            })
-        }
-
-        // data edit
-        $(document).on('click', '.edit-post', function() {
-            var data_id = $(this).data('id');
-            $.get('angkatan/' + data_id + '/edit', function(data) {
-                $('#modal-judul').html("Edit Angkatan");
-                $('#tombol-simpan').val("edit-post");
-                $('#tambah-edit-modal').modal('show');
-                //set value                
-                $('#id').val(data.id);
-                $('#nama').val(data.nama);
-            })
-        });
-
         //delete
         $(document).on('click', '.delete', function() {
             dataId = $(this).attr('id');
@@ -195,7 +137,7 @@
 
         $('#tombol-hapus').click(function() {
             $.ajax({
-                url: "angkatan/" + dataId,
+                url: "anggota/" + dataId,
                 type: 'delete',
                 beforeSend: function() {
                     $('#tombol-hapus').text('Hapus Data');
@@ -226,14 +168,14 @@
                 },
                 // buttons: ["copy", "excel", "pdf"],
                 "columnDefs": [{
-                    "width": "70%",
-                    "targets": 1
+                    "width": "40%",
+                    "targets": 2
                 }],
 
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.angkatan.index') }}",
+                    url: "{{ route('admin.anggota.index') }}",
                     type: 'GET',
                 },
 
@@ -245,9 +187,31 @@
                         }
                     },
                     {
-                        data: "nama",
-                        name: "nama",
+                        data: "pengguna_detail",
+                        name: "pengguna_detail.nim",
+                        "render": function (data) {
+                            if (data) {
+                                return data.nim
+                            }else{
+                                return null
+                            }
+                        }
+                    },
+                    {
+                        data: "name",
+                        name: "name",
 
+                    },
+                    {
+                        data: "pengguna_detail",
+                        name: "pengguna_detail.angkatan.nama",
+                        "render": function (data) {
+                            if (data) {
+                                return data.angkatan.nama
+                            }else{
+                                return null
+                            }
+                        }
                     },
                     {
                         data: "action",

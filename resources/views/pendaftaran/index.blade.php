@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', 'Master Angkatan')
+@section('title', 'Master Pendaftaran')
 
 @section('content')
 
@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Master Angkatan</h1>
+                    <h1>Master Pendaftaran</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -28,10 +28,53 @@
                                 <input type="hidden" name="id" id="id">
 
                                 <div class="form-group">
-                                    <label for="nama" class="col-sm-12 control-label">Nama</label>
+                                    <label for="angkatan_id" class="col-sm-12 control-label">Angkatan</label>
                                     <div class="col-sm-12">
-                                        <input type="text" autofocus class="form-control" id="nama" name="nama" value=""
+                                        <select name="angkatan_id" id="angkatan_id" class="form-control">
+                                            <option selected disabled>-- Pilih Angkatan --</option>
+                                            @foreach ($angkatan as $item)
+                                                <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="judul" class="col-sm-12 control-label">Judul Pendaftaran</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" autofocus class="form-control" id="judul" name="judul" value=""
                                             required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="deskripsi" class="col-sm-12 control-label">Deskripsi</label>
+                                    <div class="col-sm-12">
+                                        <textarea name="deskripsi" id="deskripsi" rows="3" class="form-control"></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tanggal_buka" class="col-sm-12 control-label">Tanggal Buka</label>
+                                    <div class="col-sm-12">
+                                        <input type="date" autofocus class="form-control" id="tanggal_buka"
+                                            name="tanggal_buka" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tanggal_tutup" class="col-sm-12 control-label">Tanggal Tutup</label>
+                                    <div class="col-sm-12">
+                                        <input type="date" autofocus class="form-control" id="tanggal_tutup"
+                                            name="tanggal_tutup" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="link_wa" class="col-sm-12 control-label">Link WA</label>
+                                    <div class="col-sm-12">
+                                        <input type="text" autofocus class="form-control" id="link_wa" name="link_wa"
+                                            value="" required>
                                     </div>
                                 </div>
 
@@ -82,7 +125,7 @@
 
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Master Angkatan</h3>
+                            <h3 class="card-title">Data Master Pendaftaran</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body table-responsive">
@@ -93,7 +136,11 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
+                                        <th>Angkatan</th>
+                                        <th>Judul Pendaftaran</th>
+                                        <th>Tanggal Buka</th>
+                                        <th>Tanggal Tutup</th>
+                                        <th>Link WA</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -114,10 +161,10 @@
 
 @section('script')
     <!-- jquery validated -->
-    <script src="{{url('assets/adminlte/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+    <script src="{{ url('assets/adminlte/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
 
     <!-- iziToast -->
-    <script src="{{url('assets/js/iziToast.js')}}"></script>
+    <script src="{{ url('assets/js/iziToast.js') }}"></script>
 
 
     <script>
@@ -135,12 +182,12 @@
             $('#button-simpan').val("create-post");
             $('#id').val('');
             $('#form-tambah-edit').trigger("reset");
-            $('#modal-judul').html("Tambah Angkatan");
+            $('#modal-judul').html("Tambah Pendaftaran");
             $('#tambah-edit-modal').modal('show');
         })
 
         $('#tambah-edit-modal').on('shown.bs.modal', function() {
-            $("#nama").focus();
+            $("#judul").focus();
         })
 
         // form tambah
@@ -151,7 +198,7 @@
                     $('#tombol-simpan').html('Sending..');
                     $.ajax({
                         data: $('#form-tambah-edit').serialize(),
-                        url: "{{ route('admin.angkatan.store') }}",
+                        url: "{{ route('admin.pendaftaran.store') }}",
                         type: "POST",
                         dataType: 'json',
                         success: function(data) {
@@ -177,13 +224,18 @@
         // data edit
         $(document).on('click', '.edit-post', function() {
             var data_id = $(this).data('id');
-            $.get('angkatan/' + data_id + '/edit', function(data) {
-                $('#modal-judul').html("Edit Angkatan");
+            $.get('pendaftaran/' + data_id + '/edit', function(data) {
+                $('#modal-judul').html("Edit Pendaftaran");
                 $('#tombol-simpan').val("edit-post");
                 $('#tambah-edit-modal').modal('show');
                 //set value                
                 $('#id').val(data.id);
-                $('#nama').val(data.nama);
+                $('#judul').val(data.judul);
+                $('#tanggal_buka').val(data.tanggal_buka);
+                $('#tanggal_tutup').val(data.tanggal_tutup);
+                $('#link_wa').val(data.link_wa);
+                $('#angkatan_id').val(data.angkatan_id);
+                $('#deskripsi').val(data.deskripsi);
             })
         });
 
@@ -195,7 +247,7 @@
 
         $('#tombol-hapus').click(function() {
             $.ajax({
-                url: "angkatan/" + dataId,
+                url: "pendaftaran/" + dataId,
                 type: 'delete',
                 beforeSend: function() {
                     $('#tombol-hapus').text('Hapus Data');
@@ -225,15 +277,17 @@
                     "processing": "<span class='fa-2x'><i class='fas fa-spinner fa-spin'></i></span>"
                 },
                 // buttons: ["copy", "excel", "pdf"],
-                "columnDefs": [{
-                    "width": "70%",
-                    "targets": 1
-                }],
+                "columnDefs": [
+                    // {
+                    //     "width": "30%",
+                    //     "targets": 2
+                    // }
+                ],
 
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: "{{ route('admin.angkatan.index') }}",
+                    url: "{{ route('admin.pendaftaran.index') }}",
                     type: 'GET',
                 },
 
@@ -245,8 +299,55 @@
                         }
                     },
                     {
-                        data: "nama",
-                        name: "nama",
+                        data: "angkatan.nama",
+                        name: "angkatan.nama",
+
+                    },
+                    {
+                        data: "judul",
+                        name: "judul",
+
+                    },
+                    {
+                        data: "tanggal_buka",
+                        name: "tanggal_buka",
+                        render: function(data) {
+                            let today = new Date(data);
+                            const yyyy = today.getFullYear();
+                            let mm = today.getMonth() + 1; // Months start at 0!
+                            let dd = today.getDate();
+
+                            if (dd < 10) dd = '0' + dd;
+                            if (mm < 10) mm = '0' + mm;
+
+                            today = dd + '/' + mm + '/' + yyyy;
+                            return today
+                        }
+
+                    },
+                    {
+                        data: "tanggal_tutup",
+                        name: "tanggal_tutup",
+                        render: function(data) {
+                            let today = new Date(data);
+                            const yyyy = today.getFullYear();
+                            let mm = today.getMonth() + 1; // Months start at 0!
+                            let dd = today.getDate();
+
+                            if (dd < 10) dd = '0' + dd;
+                            if (mm < 10) mm = '0' + mm;
+
+                            today = dd + '/' + mm + '/' + yyyy;
+                            return today
+                        }
+                    },
+                    {
+                        data: "link_wa",
+                        name: "link_wa",
+                        render: function(data) {
+                            return "<a target='_blank' class='btn btn-success' href='" + data +
+                                "'> <i class='fab fa-whatsapp'> </i> </a>"
+                        }
 
                     },
                     {

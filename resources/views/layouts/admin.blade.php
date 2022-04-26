@@ -37,7 +37,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('assets/adminlte') }}/plugins/summernote/summernote-bs4.min.css">
     <!-- iziToas -->
-    <link rel="stylesheet" href="{{ asset('assets/vendor') }}/iziToast.css" />
+    <link rel="stylesheet" href="{{ asset('assets/css') }}/iziToast.css" />
 
 
     <style>
@@ -123,7 +123,7 @@
                             </a>
                         </li>
                         <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
+                            <a href="{{ url('/admin/anggota') }}"
                                 class="{{ strpos(Route::currentRouteName(), 'admin.anggota') === 0 ? 'active' : '' }} nav-link">
                                 <i class="nav-icon fas fa-users"></i>
                                 <p>
@@ -132,8 +132,8 @@
                             </a>
                         </li>
                         <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'admin.anggota') === 0 ? 'active' : '' }} nav-link">
+                            <a href="{{ url('/admin/pendaftaran') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'admin.pendaftaran') === 0 ? 'active' : '' }} nav-link">
                                 <i class="nav-icon fas fa-user-plus"></i>
                                 <p>
                                     Pendaftaran

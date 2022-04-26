@@ -23,7 +23,7 @@ class AdminSeeder extends Seeder
             'updated_at' => now(),
         ]);
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i=0; $i < 100; $i++) { 
             DB::table('users')->insert([
                 'name' => $faker->name,
                 'email' => $faker->email,

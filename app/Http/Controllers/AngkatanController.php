@@ -11,7 +11,7 @@ class AngkatanController extends Controller
     public function index(Request $request, Angkatan $Angkatan)
     {
         if ($request->ajax()) {
-            $Angkatans = $Angkatan::all();
+            $Angkatans = $Angkatan::get();
             return datatables()->of($Angkatans)
             ->addColumn('action', function($data){
                 $button = '<a href="javascript:void(0)" data-toggle="tooltip"  data-id="'.$data->id.'" data-original-title="Edit" class="edit btn btn-warning btn-sm edit-post"><i class="far fa-edit"></i> Edit</a>';
