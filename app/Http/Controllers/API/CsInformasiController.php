@@ -91,7 +91,7 @@ class CsInformasiController extends BaseController
                 }elseif ($accessDate <= $dateEnd) {
                     $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Belum Di Buka!";
                 }
-                $data = ["open" => false];
+                $data = ["open" => false, "judul" => $data->judul];
             }
             return $this->sendResponse($data, $message);
         } catch (\Exception $e) {

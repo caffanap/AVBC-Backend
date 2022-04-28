@@ -50,7 +50,7 @@ class InfoController extends Controller
         $post = Info::updateOrCreate(['id'=>$id],[
             'judul'  =>  $request->judul,
             'deskripsi'  =>  $request->deskripsi,
-            'angkatan_id'  =>  $request->angkatan_id,
+            'angkatan_id'  =>  $request->angkatan_id != 'Semua Angkatan' ? $request->angkatan_id : null,
         ]);
 
         return response()->json($post);
