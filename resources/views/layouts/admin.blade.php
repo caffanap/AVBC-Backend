@@ -114,8 +114,8 @@
                             </a>
                         </li>
                         <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'admin.kegiatan') === 0 ? 'active' : '' }} nav-link">
+                            <a href="{{ url('/admin/informasi') }}"
+                                class="{{ strpos(Route::currentRouteName(), 'admin.informasi') === 0 ? 'active' : '' }} nav-link">
                                 <i class="nav-icon fas fa-bullhorn"></i>
                                 <p>
                                     Informasi

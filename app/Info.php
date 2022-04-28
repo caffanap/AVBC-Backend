@@ -8,4 +8,9 @@ class Info extends Model
 {
     protected $fillable = ['angkatan_id', 'judul', 'deskripsi', 'lokasi', 'jadwal', 'ketentuan', 'maps'];
     //
+    public function angkatan()
+    {
+        return $this->belongsTo(Angkatan::class);
+    }
+
 }

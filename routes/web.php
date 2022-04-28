@@ -30,8 +30,16 @@ Route::prefix('admin')->group(function () {
         Route::post('anggota', 'PenggunaDetailController@store')->name('anggota.store');
         Route::delete('anggota/{id}', 'PenggunaDetailController@destroy');
 
+        Route::get('informasi', 'InfoController@index')->name('informasi.index');
+        Route::post('informasi', 'InfoController@store')->name('informasi.store');
+        Route::delete('informasi/{id}', 'InfoController@destroy');
+        Route::get('informasi/{id}/edit', 'InfoController@edit');
+
+
+
         Route::resource('angkatan', AngkatanController::class);
         Route::resource('pendaftaran', PendaftaranController::class);
+        
 
         Route::get('change-password', 'DashboardController@changePassword')->name('change-password');
         Route::post('change-password', 'DashboardController@changePassword')->name('process-change-password');
