@@ -97,9 +97,9 @@ class InfoController extends Controller
      * @param  \App\Info  $Info
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Info $Info)
+    public function destroy(Info $Info, $id)
     {
-        $InfoDelete = $Info->delete();
+        $InfoDelete = $Info->find($id)->delete();
 
         return response()->json($InfoDelete);
         //
