@@ -16,5 +16,6 @@ Route::prefix('public')->group(function () {
 
 Route::middleware(['auth:api'])->prefix('main')->group(function () {
     Route::get('info', 'API\CsInformasiController@info');
+    Route::get('kegiatan', 'API\CsInformasiController@kegiatan');
     Route::get('group-wa', 'API\CsInformasiController@groupWa');
 });
