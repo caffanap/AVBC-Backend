@@ -105,7 +105,7 @@
                             </a>
                         </li>
                         <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
+                            <a href="{{ url('/admin/kegiatan') }}"
                                 class="{{ strpos(Route::currentRouteName(), 'admin.kegiatan') === 0 ? 'active' : '' }} nav-link">
                                 <i class="nav-icon fas fa-dice"></i>
                                 <p>

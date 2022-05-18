@@ -35,8 +35,12 @@ Route::prefix('admin')->group(function () {
         Route::delete('informasi/{id}', 'InfoController@destroy');
         Route::get('informasi/{id}/edit', 'InfoController@edit');
 
+        Route::get('kegiatan', 'KegiatanController@index')->name('kegiatan.index');
+        Route::post('kegiatan', 'KegiatanController@store')->name('kegiatan.store');
+        Route::delete('kegiatan/{id}', 'KegiatanController@destroy');
+        Route::get('kegiatan/{id}/edit', 'KegiatanController@edit');
 
-
+        
         Route::resource('angkatan', AngkatanController::class);
         Route::resource('pendaftaran', PendaftaranController::class);
         
