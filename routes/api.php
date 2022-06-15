@@ -11,7 +11,7 @@ Route::prefix('public')->group(function () {
     Route::get('faq', 'API\CsInformasiController@faq');
     Route::get('teman-angkatan', 'API\CsInformasiController@temanAngkatan');
     Route::get('hari-pendaftaran', 'API\CsInformasiController@hariPendaftaranDibuka');
-    
+    Route::get('jurusan', 'API\CsInformasiController@jurusan');
 });
 
 Route::middleware(['auth:api'])->prefix('main')->group(function () {

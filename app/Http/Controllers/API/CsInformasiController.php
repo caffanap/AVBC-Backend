@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Angkatan;
 use App\Faq;
 use App\Info;
+use App\Jurusan;
 use App\Pendaftaran;
 use App\PenggunaDetail;
 use App\User;
@@ -92,6 +93,11 @@ class CsInformasiController extends BaseController
         } catch (\Exception $e) {
             return $this->sendError($e->getMessage(), null, 500);
         }
+    }
+
+    public function jurusan(Jurusan $jurusan)
+    {
+        return $this->sendResponse($jurusan->all(), "Berhasil menampilkan jurusan");
     }
 
     public function hariPendaftaranDibuka(Pendaftaran $pendaftaran)

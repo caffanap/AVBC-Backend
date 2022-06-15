@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/', '/admin/login');
 
 Route::prefix('auth')->group(function () {
     Route::post('/login', 'AuthenticationController@authenticate');
