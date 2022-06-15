@@ -117,7 +117,7 @@ class CsInformasiController extends BaseController
 
             if (($accessDate >= $dateStart) && ($accessDate <= $dateEnd)) {
                 $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Sudah Di Buka!";
-                $data = ["open" => true, "judul" => $data->judul, "deskripsi" => $data->deskripsi];
+                $data = ["open" => true, "judul" => $data->judul, "deskripsi" => $data->deskripsi, "angkatan_id" => $data->angkatan->id];
             } else {
                 if ($accessDate >= $dateStart) {
                     $message = "Pendaftaran Tahun " . $data->angkatan->nama . " Sudah Di Tutup!";
