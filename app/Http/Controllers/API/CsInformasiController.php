@@ -8,6 +8,7 @@ use App\Info;
 use App\Jurusan;
 use App\Pendaftaran;
 use App\PenggunaDetail;
+use App\Posisi;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -100,9 +101,9 @@ class CsInformasiController extends BaseController
         return $this->sendResponse($jurusan->all(), "Berhasil menampilkan jurusan");
     }
 
-    public function angkatan(Angkatan $angkatan)
+    public function posisi(Posisi $posisi)
     {
-        return $this->sendResponse($angkatan->all(), "Berhasil menampilkan angkatan");
+        return $this->sendResponse($posisi->all(), "Berhasil menampilkan posisi");
     }
 
     public function hariPendaftaranDibuka(Pendaftaran $pendaftaran)
