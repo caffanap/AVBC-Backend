@@ -100,6 +100,11 @@ class CsInformasiController extends BaseController
         return $this->sendResponse($jurusan->all(), "Berhasil menampilkan jurusan");
     }
 
+    public function angkatan(Angkatan $angkatan)
+    {
+        return $this->sendResponse($angkatan->all(), "Berhasil menampilkan angkatan");
+    }
+
     public function hariPendaftaranDibuka(Pendaftaran $pendaftaran)
     {
         try {
