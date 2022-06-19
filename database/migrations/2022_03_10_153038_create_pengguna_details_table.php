@@ -27,8 +27,7 @@ class CreatePenggunaDetailsTable extends Migration
             $table->foreignId('posisi_id')->nullable();
             $table->foreign('posisi_id')->references('id')->on('posisis')->onDelete('cascade');
             $table->text('prestasi')->nullable();
-            $table->string('foto')->nullable();
-            $table->boolean('alumni')->default(0);
+            $table->enum('role', ['ketua', 'wakil', 'sekretaris', 'bendahara', 'member'])->default('member');
             $table->timestamps();
         });
     }

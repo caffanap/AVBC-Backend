@@ -141,25 +141,6 @@
                             </a>
                         </li>
 
-                        <li class="nav-header">Extra</li>
-                        <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'admin.masukan') === 0 ? 'active' : '' }} nav-link">
-                                <i class="nav-icon fas fa-comment"></i>
-                                <p>
-                                    Masukan
-                                </p>
-                            </a>
-                        </li>
-                        <li class=" nav-item">
-                            <a href="{{ url('/admin/dashboard') }}"
-                                class="{{ strpos(Route::currentRouteName(), 'admin.masukan') === 0 ? 'active' : '' }} nav-link">
-                                <i class="nav-icon fas fa-info"></i>
-                                <p>
-                                    Faqs
-                                </p>
-                            </a>
-                        </li>
                         <li class="nav-header">Akun</li>
                         <li class="nav-item">
                             <a href="{{ url('/admin/change-password') }}" class="{{ strpos(Route::currentRouteName(), 'admin.change-password') === 0 ? 'active' : '' }} nav-link">

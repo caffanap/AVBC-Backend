@@ -36,19 +36,10 @@ class AuthController extends BaseController
             'jurusan_id' => 'required',
             'nim' => 'required',
             'posisi_id' => 'required',
-            'foto' => ['nullable', 'sometimes', 'mimes:jpg,png,jpeg', 'max:2048'],
-
         ]);
 
         if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors(), 400);
-        }
-
-        if ($request->foto) {
-            $photoPath = url('/photo') . "/" . Str::uuid() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('photo'), $photoPath);
-        } else {
-            $photoPath = null;
         }
 
         $input = $request->all();
@@ -65,9 +56,7 @@ class AuthController extends BaseController
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'jurusan_id' => $request->jurusan_id,
                 'nim' => $request->nim,
-                'prestasi' => $request->prestasi,
-                'foto' => $photoPath,
-                'alumni' => 0,
+                'prestasi' => $request->prestasi
             ]);
 
             DB::commit();

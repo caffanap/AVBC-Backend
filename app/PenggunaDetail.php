@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PenggunaDetail extends Model
 {
-    protected $fillable = ['user_id', 'angkatan_id', 'alamat', 'jenis_kelamin', 'jurusan_id', 'nim', 'posisi_id', 'prestasi', 'foto', 'alumni'];
+    protected $fillable = ['user_id', 'angkatan_id', 'alamat', 'jenis_kelamin', 'jurusan_id', 'nim', 'posisi_id', 'prestasi', 'role'];
     //
     public function user()
     {
