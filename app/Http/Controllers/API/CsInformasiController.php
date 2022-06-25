@@ -108,10 +108,10 @@ class CsInformasiController extends BaseController
 
     public function jabatan(PenggunaDetail $penggunaDetail)
     {
-        $data['ketua'] = $penggunaDetail->with(['jurusan', 'posisi', 'angkatan'])->where('role', 'ketua')->first();
-        $data['wakil'] = $penggunaDetail->with(['jurusan', 'posisi', 'angkatan'])->where('role', 'wakil')->first();
-        $data['sekretaris'] = $penggunaDetail->with(['jurusan', 'posisi', 'angkatan'])->where('role', 'sekretaris')->first();
-        $data['bendahara'] = $penggunaDetail->with(['jurusan', 'posisi', 'angkatan'])->where('role', 'bendahara')->first();
+        $data['ketua'] = $penggunaDetail->with(['user', 'jurusan', 'posisi', 'angkatan'])->where('role', 'ketua')->first();
+        $data['wakil'] = $penggunaDetail->with(['user', 'jurusan', 'posisi', 'angkatan'])->where('role', 'wakil')->first();
+        $data['sekretaris'] = $penggunaDetail->with(['user', 'jurusan', 'posisi', 'angkatan'])->where('role', 'sekretaris')->first();
+        $data['bendahara'] = $penggunaDetail->with(['user', 'jurusan', 'posisi', 'angkatan'])->where('role', 'bendahara')->first();
 
         return $this->sendResponse($data, "Berhasil menampilkan jabatan");
     }
