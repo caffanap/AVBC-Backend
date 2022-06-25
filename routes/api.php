@@ -13,6 +13,7 @@ Route::prefix('public')->group(function () {
     Route::get('hari-pendaftaran', 'API\CsInformasiController@hariPendaftaranDibuka');
     Route::get('jurusan', 'API\CsInformasiController@jurusan');
     Route::get('posisi', 'API\CsInformasiController@posisi');
+    Route::get('jabatan', 'API\CsInformasiController@jabatan');
 });
 
 Route::middleware(['auth:api'])->prefix('main')->group(function () {
