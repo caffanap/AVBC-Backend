@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\PenggunaDetail;
 use App\User;
+use Error;
 use Illuminate\Http\Request;
 
 class PenggunaDetailController extends Controller
@@ -13,13 +15,13 @@ class PenggunaDetailController extends Controller
         if ($request->ajax()) {
             $Users = $User::with('pengguna_detail.angkatan')->where('role', 'user')->get();
             return datatables()->of($Users)
-            ->addColumn('action', function($data){
-                $button = '<button type="button" name="delete" id="'.$data->id.'" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
-            ->addIndexColumn()
-            ->make(true);
+                ->addColumn('action', function ($data) {
+                    $button = '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+                    return $button;
+                })
+                ->rawColumns(['action'])
+                ->addIndexColumn()
+                ->make(true);
         }
 
         return view('anggota.index');
@@ -45,7 +47,7 @@ class PenggunaDetailController extends Controller
     {
         $id = $request->id;
 
-        $post = User::updateOrCreate(['id'=>$id],[
+        $post = User::updateOrCreate(['id' => $id], [
             'nama'  =>  $request->nama,
         ]);
 
@@ -58,9 +60,19 @@ class PenggunaDetailController extends Controller
      * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(User $User)
+    public function show(User $User, $id)
     {
-        //
+        $data['user'] = $User->with(['pengguna_detail.jurusan', 'pengguna_detail.posisi', 'pengguna_detail.angkatan'])->find($id);
+        return view('anggota/detail', $data);
+    }
+
+    public function updateJabatan(User $User, Request $request)
+    {
+        $user = $User->with('pengguna_detail')->where('id', $request->id)->first();
+        $user->pengguna_detail->role = $request->role;
+        $user->pengguna_detail->save();
+
+        return redirect('/admin/anggota/' . $request->id);
     }
 
     /**

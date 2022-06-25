@@ -18,4 +18,14 @@ class PenggunaDetail extends Model
         return $this->belongsTo(Angkatan::class);
     }
 
+    public function posisi()
+    {
+        return $this->belongsTo(Posisi::class);
+    }
+
+    public function jurusan()
+    {
+        return $this->belongsTo(Jurusan::class);
+    }
+
 }

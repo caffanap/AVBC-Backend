@@ -30,6 +30,8 @@ Route::prefix('admin')->group(function () {
         Route::get('anggota', 'PenggunaDetailController@index')->name('anggota.index');
         Route::post('anggota', 'PenggunaDetailController@store')->name('anggota.store');
         Route::delete('anggota/{id}', 'PenggunaDetailController@destroy');
+        Route::get('anggota/{id}', 'PenggunaDetailController@show');
+        Route::post('anggota/update-jabatan', 'PenggunaDetailController@updateJabatan');
 
         Route::get('informasi', 'InfoController@index')->name('informasi.index');
         Route::post('informasi', 'InfoController@store')->name('informasi.store');
