@@ -68,7 +68,7 @@ class AuthController extends BaseController
             return $this->sendResponse($success, 'User register successfully.');
         } catch (\Exception $e) {
             DB::rollBack();
-            return $this->sendError($e->errorInfo[2], null, 500);
+            return $this->sendError($e->errorInfo, null, 500);
         }
     }
 
