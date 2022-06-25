@@ -16,7 +16,7 @@ class PenggunaDetailController extends Controller
             $Users = $User::with('pengguna_detail.angkatan')->where('role', 'user')->get();
             return datatables()->of($Users)
                 ->addColumn('action', function ($data) {
-                    $button = '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
+                    $button = '<a href="/admin/anggota/' . $data->id . '" class="btn btn-secondary btn-sm"><i class="far fa-eye"></i> Detail</a> <button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm"><i class="far fa-trash-alt"></i> Delete</button>';
                     return $button;
                 })
                 ->rawColumns(['action'])
