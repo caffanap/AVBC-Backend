@@ -28,11 +28,11 @@
                                 </tr>
                                 <tr>
                                     <td>Angkatan</td>
-                                    <td>{{ $user->pengguna_detail->angkatan->nama }}</td>
+                                    <td>{{ $user->pengguna_detail->angkatan ? $user->pengguna_detail->angkatan->nama : '-' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Jurusan</td>
-                                    <td>{{ $user->pengguna_detail->jurusan->nama }}</td>
+                                    <td>{{ $user->pengguna_detail->jurusan ? $user->pengguna_detail->jurusan->nama : '-' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Nama</td>
@@ -56,7 +56,7 @@
                                 </tr>
                                 <tr>
                                     <td>Posisi</td>
-                                    <td>{{ $user->pengguna_detail->posisi->posisi }}</td>
+                                    <td>{{ $user->pengguna_detail->posisi ? $user->pengguna_detail->posisi->posisi : '-' }}</td>
                                 </tr>
                                 <tr>
                                     <td>Prestasi</td>
