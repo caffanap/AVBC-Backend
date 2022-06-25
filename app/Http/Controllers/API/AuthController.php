@@ -56,7 +56,8 @@ class AuthController extends BaseController
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'jurusan_id' => $request->jurusan_id,
                 'nim' => $request->nim,
-                'prestasi' => $request->prestasi
+                'prestasi' => $request->prestasi,
+                'role' => 'member'
             ]);
 
             DB::commit();
@@ -79,9 +80,9 @@ class AuthController extends BaseController
 
     public function login(Request $request)
     {
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'role' => 'member'])) {
             $authenticated_user = Auth::user();
-            if ($authenticated_user->role == 'admin') return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
+            // if ($authenticated_user->role == 'admin') return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
             $user = User::with('pengguna_detail')->where('id', $authenticated_user->id)->first();
             $success['token'] = $user->createToken('Avbc')->accessToken;
             $success['user'] = $user;
