@@ -12,12 +12,30 @@ class PosisiSeeder extends Seeder
      */
     public function run()
     {
-        for ($i = 0; $i < 5; $i++) {
-            DB::table('posisis')->insert([
-                'posisi' => 'Posisi ' . ($i + 1),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        DB::table('posisis')->insert([
+            'posisi' => 'Open Spiker',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('posisis')->insert([
+            'posisi' => 'Quicker',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('posisis')->insert([
+            'posisi' => 'All Round Spiker',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('posisis')->insert([
+            'posisi' => 'Setter/Tosser',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+        DB::table('posisis')->insert([
+            'posisi' => 'Defender/Libero',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
     }
 }
