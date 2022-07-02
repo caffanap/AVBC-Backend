@@ -55,6 +55,7 @@ class AuthController extends BaseController
                 'alamat' => $request->alamat,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'jurusan_id' => $request->jurusan_id,
+                'posisi_id' => $request->posisi_id,
                 'nim' => $request->nim,
                 'prestasi' => $request->prestasi,
                 'role' => 'member'

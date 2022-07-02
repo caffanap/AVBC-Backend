@@ -13,7 +13,7 @@ class PenggunaDetailSeeder extends Seeder
     public function run(Faker\Generator $faker)
     {
         //
-        for ($i=1; $i < 101; $i++) { 
+        for ($i=1; $i < 21; $i++) { 
             DB::table('pengguna_details')->insert([
                 'user_id' => ($i+1),
                 'angkatan_id' => $faker->numberBetween(1, 5),
