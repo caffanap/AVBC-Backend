@@ -34,8 +34,8 @@ class AuthController extends BaseController
             'alamat' => 'required',
             'jenis_kelamin' => 'required',
             'jurusan_id' => 'required',
-            'nim' => 'required',
             'posisi_id' => 'required',
+            'nim' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -52,10 +52,10 @@ class AuthController extends BaseController
             $detail = PenggunaDetail::create([
                 'user_id' => $user->id,
                 'angkatan_id' => $request->angkatan_id,
+                'posisi_id' => $request->posisi_id,
                 'alamat' => $request->alamat,
                 'jenis_kelamin' => $request->jenis_kelamin,
                 'jurusan_id' => $request->jurusan_id,
-                'posisi_id' => $request->posisi_id,
                 'nim' => $request->nim,
                 'prestasi' => $request->prestasi,
                 'role' => 'member'
