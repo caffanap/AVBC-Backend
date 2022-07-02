@@ -29,7 +29,7 @@
 
                 <form action="{{ url('auth/login') }}" method="post">
                     @csrf
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <input type="text" class="form-control" name="email" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -37,7 +37,10 @@
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
+                    @error('email')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <div class="input-group mt-3">
                         <input type="password" class="form-control" name="password" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
@@ -45,14 +48,17 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                    @error('password')
+                        <span class="text-danger">{{ $message }}</span>
+                    @enderror
+                    <button type="submit" class="mt-3 btn btn-primary btn-block">Sign In</button>
                     @if (Session::has('error'))
-                    <div class="alert alert-danger mt-4" role="alert">
-                        {{ Session::get('error') }}
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
+                        <div class="alert alert-danger mt-4" role="alert">
+                            {{ Session::get('error') }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
                     @endif
                 </form>
             </div>
