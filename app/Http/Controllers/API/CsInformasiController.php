@@ -72,7 +72,9 @@ class CsInformasiController extends BaseController
     {
         try {
             if ($request->angkatan) {
-                $data = $angkatan->with('pengguna_detail.user')->where('id', $request->angkatan)->first();
+                $data = $angkatan->with(['pengguna_detail.user' => function($query) {
+                    $query->orderBy('name', 'ASC');
+                }])->where('id', $request->angkatan)->first();
             } else {
                 $data = $angkatan->with('pengguna_detail.user')->get();
             }
