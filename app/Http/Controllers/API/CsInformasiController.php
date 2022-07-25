@@ -22,7 +22,7 @@ class CsInformasiController extends BaseController
         if ($authenticated_user) {
             try {
                 $user = User::with('pengguna_detail')->where('id', $authenticated_user->id)->first();
-                $data = $info->where('type', 'info')->where('angkatan_id', $user->pengguna_detail->angkatan_id)->orWhere('angkatan_id', null)->get();
+                $data = $info->where('type', 'info')->where('angkatan_id', $user->pengguna_detail->angkatan_id)->orWhere('angkatan_id', null)->orderBy('id', 'DESC')->get();
                 return $this->sendResponse($data, 'Berhasil menampilkan list info');
             } catch (\Exception $e) {
                 return $this->sendError($e->errorInfo[2], null, 500);
@@ -43,7 +43,7 @@ class CsInformasiController extends BaseController
         if ($authenticated_user) {
             try {
                 $user = User::with('pengguna_detail')->where('id', $authenticated_user->id)->first();
-                $data = $info->where('type', 'kegiatan')->where('angkatan_id', $user->pengguna_detail->angkatan_id)->orWhere('angkatan_id', null)->get();
+                $data = $info->where('type', 'kegiatan')->where('angkatan_id', $user->pengguna_detail->angkatan_id)->orWhere('angkatan_id', null)->orderBy('id', 'DESC')->get();
                 return $this->sendResponse($data, 'Berhasil menampilkan list kegiatan');
             } catch (\Exception $e) {
                 return $this->sendError($e->errorInfo[2], null, 500);
